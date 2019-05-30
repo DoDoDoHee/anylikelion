@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>메인페이지입니다</h1>
+    {% if user.is_authenticated %}
+    안녕하세요! {{user.username}}님!
+        <a href="{%url 'logout'%}">로그아웃</a>
+    {%else%}
+    <a href="{%url 'sign_up'%}">회원가입</a>
+    <a href="{%url 'login'%}">로그인</a>
+    {%endif%}
+    <a href="{%url 'new'%}"><h3>글쓰기</h3></a>
+    {% for blogs in blogs.all %}
+        <a href="{%url 'detail' blogs.id %}"><h1>{{blogs.title}}</h1></a>
+        {{blogs.body}}<br>
+        {{blogs.pub_date}}<br>
+        <a href="{%url 'update' blogs.id %}">글 수정하기</a>
+        <a href="{%url 'delete' blogs.id %}">글 삭제하기</a>
+        <hr>
+        <hr>
+    {%endfor%}
+</body>
+</html>
